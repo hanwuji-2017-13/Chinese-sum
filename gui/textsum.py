@@ -27,6 +27,9 @@ class Frame ( wx.Frame ):
 		self.m_menuItem2 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"打开", wx.EmptyString, wx.ITEM_NORMAL )
 		self.m_menu1.Append( self.m_menuItem2 )
 		
+		self.m_menuItem3 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"退出", wx.EmptyString, wx.ITEM_NORMAL )
+		self.m_menu1.Append( self.m_menuItem3 )
+		
 		self.m_menubar1.Append( self.m_menu1, u"文件" ) 
 		
 		self.m_menu2 = wx.Menu()
@@ -42,7 +45,7 @@ class Frame ( wx.Frame ):
 		bSizer2 = wx.BoxSizer( wx.HORIZONTAL )
 		
 		self.m_textCtrl1 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE )
-		self.m_textCtrl1.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+		self.m_textCtrl1.SetFont( wx.Font( 14, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "微软雅黑" ) )
 		
 		bSizer2.Add( self.m_textCtrl1, 1, wx.ALL|wx.EXPAND, 5 )
 		
@@ -64,7 +67,7 @@ class Frame ( wx.Frame ):
 		
 		bSizer6 = wx.BoxSizer( wx.HORIZONTAL )
 		
-		self.m_textCtrl2 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE|wx.TE_READONLY )
+		self.m_textCtrl2 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE )
 		self.m_textCtrl2.SetFont( wx.Font( 15, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
 		
 		bSizer6.Add( self.m_textCtrl2, 1, wx.EXPAND|wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
@@ -131,6 +134,7 @@ class Frame ( wx.Frame ):
 		
 		# Connect Events
 		self.Bind( wx.EVT_MENU, self.OnOpen, id = self.m_menuItem2.GetId() )
+		self.Bind( wx.EVT_MENU, self.OnExit, id = self.m_menuItem3.GetId() )
 		self.Bind( wx.EVT_MENU, self.OnAbout, id = self.m_menuItem1.GetId() )
 		self.m_bpButton1.Bind( wx.EVT_BUTTON, self.OnTextSum )
 		self.m_button2.Bind( wx.EVT_BUTTON, self.OnCopySel )
@@ -142,6 +146,9 @@ class Frame ( wx.Frame ):
 	
 	# Virtual event handlers, overide them in your derived class
 	def OnOpen( self, event ):
+		event.Skip()
+	
+	def OnExit( self, event ):
 		event.Skip()
 	
 	def OnAbout( self, event ):

@@ -54,6 +54,23 @@ class sumFrame ( Frame ):
         self.sd.GetSizer().Fit(self.sd)
         self.sd.ShowModal()
 
+    def OnCopySel(self,event):
+        dataObj = wx.TextDataObject()
+        dataObj.SetText(self.m_textCtrl2.GetValue())
+        if wx.TheClipboard.Open():
+	        wx.TheClipboard.SetData(dataObj)
+	        wx.TheClipboard.Close()
+
+    def OnCopyGen(self,event):
+        dataObj = wx.TextDataObject()
+        dataObj.SetText(self.m_textCtrl2.GetValue())
+        if wx.TheClipboard.Open():
+	        wx.TheClipboard.SetData(dataObj)
+	        wx.TheClipboard.Close()
+
+    def OnExit(self,event):
+    	self.Close()
+    	
     def OnSelTextSumFin(self,value):
         self.async_GenTextSum.run((self.m_textCtrl1.GetValue(),))
         self.m_textCtrl2.SetValue(value[0])
@@ -62,6 +79,7 @@ class sumFrame ( Frame ):
         webv=wx.html2.WebView.New(self.sd)
         self.sd.GetSizer().Add(webv,1, wx.ALL|wx.EXPAND, 5)
         webv.LoadURL(textSumApi.get_html_url())
+        self.sd.SetSize(500,500)
         self.sd.SetSize(500,500)
         self.sd.Layout()
         self.Refresh()
